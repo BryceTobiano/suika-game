@@ -34,6 +34,10 @@ export class Preloader extends Scene
 
         this.load.image('logo', 'logo.png');
         this.load.image('star', 'star.png');
+        this.load.image("suika_strawberry", 'suika_strawberry.png');
+        this.load.image("suika_cherry", 'suika_cherry.png');
+        this.load.json('suika_strawberry-shape', 'suika_strawberry-shape.json');
+        this.load.json('suika_cherry-shape', 'suika_cherry-shape.json');
     }
 
     create ()

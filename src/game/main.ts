@@ -9,17 +9,26 @@ import { Preloader } from './scenes/Preloader';
 //  https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
 const config: Phaser.Types.Core.GameConfig = {
     type: AUTO,
-    width: 1024,
-    height: 768,
+    width: 540,
+    height: 960,
     parent: 'game-container',
-    backgroundColor: '#028af8',
+    backgroundColor: '#ffffff',
     scene: [
         Boot,
         Preloader,
         MainMenu,
         MainGame,
         GameOver
-    ]
+    ],
+    physics: {
+        default: 'matter',
+        matter: {
+            debug: {
+                showBody: true,
+                showStaticBody: true
+            }
+        }
+    }
 };
 
 const StartGame = (parent: string) => {

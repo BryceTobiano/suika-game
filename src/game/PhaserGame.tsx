@@ -31,7 +31,6 @@ export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(function PhaserGame
             {
                 ref.current = { game: game.current, scene: null };
             }
-
         }
 
         return () =>
@@ -55,7 +54,7 @@ export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(function PhaserGame
             {
 
                 currentActiveScene(scene_instance);
-
+                
             }
 
             if (typeof ref === 'function')

@@ -6,6 +6,7 @@ export class MainMenu extends Scene
 {
     background: GameObjects.Image;
     logo: GameObjects.Image;
+    cursor: GameObjects.Image;
     title: GameObjects.Text;
     logoTween: Phaser.Tweens.Tween | null;
 
@@ -15,20 +16,39 @@ export class MainMenu extends Scene
     }
 
     create ()
-    {
-        this.background = this.add.image(512, 384, 'background');
+    {      
+        // Add start to follow cursor
+        this.cursor = this.add.image(512, 100, 'suika_cherry').setDepth(150).setScale(0.25);
+        this.input.on('pointermove', () => {
+            this.cursor.setPosition(this.input.mousePointer.x, 100);
+        });
 
-        this.logo = this.add.image(512, 300, 'logo').setDepth(100);
+        this.matter.world.setBounds(0, 0, 540, 960);
 
-        this.title = this.add.text(512, 460, 'Main Menu', {
-            fontFamily: 'Arial Black', fontSize: 38, color: '#ffffff',
-            stroke: '#000000', strokeThickness: 8,
-            align: 'center'
-        }).setOrigin(0.5).setDepth(100);
+        const cherry_shape = this.cache.json.get('suika_cherry-shape');
+        const strawberry_shape = this.cache.json.get('suika_strawberry-shape');
+
+        this.input.on('pointerdown', () => {
+            console.log("click!");
+            this.matter.add.image(this.input.mousePointer.x, 100, 'suika_cherry', null, { shape: cherry_shape }).setScale(0.3);
+        });
+
+        const t = this;
+        this.matter.world.on('collisionstart', function (e, objA, objB) {
+            console.log(objA); // TODO
+            console.log(objB); // TODO
+            if((objA.label == "suika_cherry.png-fixture-0") && (objB.label == "suika_cherry.png-fixture-0")) {
+                t.matter.add.image(objA.position.x, objA.position.y, 'suika_strawberry', null, { shape: strawberry_shape }).setScale(0.4);
+                // addStrawberry(bodyA.position.x, bodyA.position.y);
+                objA.gameObject.destroy();
+                objB.gameObject.destroy();
+            }
+        });
+        // this.physics.add.collider(fruits, fruits);
 
         EventBus.emit('current-scene-ready', this);
     }
-    
+
     changeScene ()
     {
         if (this.logoTween)
@@ -74,3 +94,11 @@ export class MainMenu extends Scene
         }
     }
 }
+function combineObjects(bodyA: any, bodyB: any) {
+    throw new Error('Function not implemented.');
+}
+
+function addStrawberry(x: any, y: any) {
+    throw new Error('Function not implemented.');
+}
+
