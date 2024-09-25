@@ -30,14 +30,17 @@ export class Preloader extends Scene
     preload ()
     {
         //  Load the assets for the game - Replace with your own assets
+
         this.load.setPath('assets');
 
-        this.load.image('logo', 'logo.png');
-        this.load.image('star', 'star.png');
-        this.load.image("suika_strawberry", 'suika_strawberry.png');
-        this.load.image("suika_cherry", 'suika_cherry.png');
-        this.load.json('suika_strawberry-shape', 'suika_strawberry-shape.json');
-        this.load.json('suika_cherry-shape', 'suika_cherry-shape.json');
+        this.load.image("obj0", 'obj0.png');
+        this.load.image("obj1", 'obj1.png');
+        this.load.image("obj2", 'obj2.png');
+        this.load.image("obj3", 'obj3.png');
+        this.load.image("obj4", 'obj4.png');
+        this.load.image("obj5", 'obj5.png');
+        this.load.image("obj6", 'obj6.png');
+        this.load.json('shapes', 'shapes.json');
     }
 
     create ()
